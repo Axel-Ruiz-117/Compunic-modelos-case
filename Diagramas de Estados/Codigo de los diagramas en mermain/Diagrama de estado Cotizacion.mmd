@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> BORRADOR: Vendedor inicializa formulario de cotización
+
+    BORRADOR --> BORRADOR: Agregar / eliminar productos y cantidades
+    BORRADOR --> PENDIENTE: [Vigencia en días establecida] / Generar Proforma oficial y emitir PDF
+
+    PENDIENTE --> BORRADOR: Modificación solicitada por el cliente antes del vencimiento
+    PENDIENTE --> VENCIDA: [Fecha actual > fechaVencimiento] / Caducidad automática de precios
+    PENDIENTE --> RECHAZADA: Cliente declina la oferta comercial
+    PENDIENTE --> APROBADA: [Aceptada por cliente Y Stock actual suficiente] / Cargar a venta
+
+    APROBADA --> FACTURADA: Venta procesada y factura fiscal emitida
+
+    FACTURADA --> [*]: Transacción comercial completada
+    RECHAZADA --> [*]: Cotización cancelada y archivada
+    VENCIDA --> [*]: Cotización expirada y archivada

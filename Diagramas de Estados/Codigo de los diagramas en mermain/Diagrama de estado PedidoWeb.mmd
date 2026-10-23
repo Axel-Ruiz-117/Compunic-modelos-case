@@ -1,0 +1,22 @@
+stateDiagram-v2
+    [*] --> EN_CARRITO: Cliente selecciona productos del catálogo
+
+    EN_CARRITO --> EN_CARRITO: Modificar unidades / Aplicar filtros
+    EN_CARRITO --> ABANDONADO: Vaciar carrito / Inactividad de sesión
+    EN_CARRITO --> EN_CHECKOUT: Presionar "Proceder al Pago"
+
+    EN_CHECKOUT --> PENDIENTE: [Comprobante de transferencia adjunto <= 2MB] / Registrar pedido y reservar stock
+
+    PENDIENTE --> EN_REVISION: Administrador abre detalle e inspecciona comprobante
+
+    EN_REVISION --> CONFIRMADO: [Comprobante legítimo, monto y referencia correctos] / Aprobar Venta
+    EN_REVISION --> RECHAZADO: [Comprobante inválido, ilegible o no depositado] / Justificar rechazo
+
+    RECHAZADO --> [*]: Stock liberado y cliente notificado
+
+    CONFIRMADO --> EN_PREPARACION: Facturación comercial y preparación de pedido
+
+    EN_PREPARACION --> ENTREGADO: Despacho a domicilio o retiro físico en tienda
+
+    ENTREGADO --> [*]: Pedido finalizado
+    ABANDONADO --> [*]: Sesión cerrada

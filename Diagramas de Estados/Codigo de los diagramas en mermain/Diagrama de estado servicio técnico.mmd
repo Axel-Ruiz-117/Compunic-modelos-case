@@ -1,0 +1,23 @@
+stateDiagram-v2
+    [*] --> PENDIENTE: Registro de orden de soporte / falla
+
+    PENDIENTE --> ASIGNADA: Asignar a Técnico responsable
+    PENDIENTE --> CANCELADA: Solicitud cancelada por cliente
+
+    ASIGNADA --> EN_PROCESO: Técnico presiona "Iniciar Trabajo" / Inicia cronómetro
+    ASIGNADA --> CANCELADA: Cancelación por orden superior
+
+    EN_PROCESO --> PAUSADA: Reportar falta de piezas o repuestos en taller
+    PAUSADA --> EN_PROCESO: Repuestos disponibles / Reanudar labores
+
+    EN_PROCESO --> CANCELADA: Dictamen de inviabilidad técnica / Irreparable
+
+    EN_PROCESO --> COMPLETADA: [Evidencia fotográfica válida adjunta Y Diagnóstico final redactado] / Guardar y Finalizar
+
+    COMPLETADA --> EN_CALIFICACION: Envío automático de enlace seguro al cliente
+    EN_CALIFICACION --> COMPLETADA: [Token expirado > 7 días sin respuesta]
+
+    EN_CALIFICACION --> CALIFICADA: [Puntuación 1-5 estrellas recibida] / Registrar retroalimentación
+
+    CALIFICADA --> [*]: Orden liquidada en caja y archivada
+    CANCELADA --> [*]: Entrega de equipo sin reparar y archivado

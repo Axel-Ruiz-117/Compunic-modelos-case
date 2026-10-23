@@ -1,0 +1,24 @@
+stateDiagram-v2
+    [*] --> SOLICITADA: Carga de factura original de venta
+
+    SOLICITADA --> PENDIENTE_REVISION: [Póliza vigente] / Captura de motivo y número de serie
+
+    PENDIENTE_REVISION --> EN_EVALUACION: Administrador inspecciona solicitud y hardware
+
+    EN_EVALUACION --> RECHAZADA: [Exclusión de garantía / Daño por mal uso] / Notificar al cliente
+    EN_EVALUACION --> AUTORIZADA: [Defecto atribuible a garantía] / Determinar disposición física
+
+    state AUTORIZADA {
+        [*] --> DEFINIENDO_DESTINO
+
+        DEFINIENDO_DESTINO --> REINGRESADA_STOCK: Disposición "Buen Estado" (Reingreso como seminuevo)
+        DEFINIENDO_DESTINO --> RETORNO_PROVEEDOR: Disposición "Defecto de Fábrica" (Envío a distribuidor)
+        DEFINIENDO_DESTINO --> MERMA_DESTRUIDO: Disposición "Daño Total" (Baja por merma de almacén)
+    }
+
+    REINGRESADA_STOCK --> COMPLETADA: Emisión de Nota de Crédito o equipo de reemplazo
+    RETORNO_PROVEEDOR --> COMPLETADA: Emisión de Nota de Crédito o equipo de reemplazo
+    MERMA_DESTRUIDO --> COMPLETADA: Emisión de Nota de Crédito o equipo de reemplazo
+
+    COMPLETADA --> [*]: Compensación entregada al cliente y auditoría registrada
+    RECHAZADA --> [*]: Producto devuelto al cliente y caso archivado

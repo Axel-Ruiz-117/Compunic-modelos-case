@@ -1,0 +1,26 @@
+stateDiagram-v2
+    [*] --> INACTIVA: Terminal de caja sin turno activo
+
+    INACTIVA --> ABIERTA: [Monto inicial físico declarado >= C$ 0.00] / Confirmar Apertura
+
+    state ABIERTA {
+        [*] --> EN_OPERACION
+
+        EN_OPERACION --> TRANSACCION_COBRO: Procesar cobro en mostrador
+        TRANSACCION_COBRO --> EN_OPERACION: Emitir comprobante / Actualizar saldo teórico
+
+        EN_OPERACION --> MOVIMIENTO_EXTRAORDINARIO: Registrar entrada / salida menor
+        MOVIMIENTO_EXTRAORDINARIO --> EN_OPERACION: [Saldo suficiente si es egreso] / Actualizar gaveta
+    }
+
+    ABIERTA --> EN_ARQUEO: Cajero presiona "Cerrar Caja"
+    EN_ARQUEO --> ABIERTA: Cajero presiona "Cancelar"
+
+    EN_ARQUEO --> CONCILIADA: [Diferencia de arqueo == C$ 0.00]
+    EN_ARQUEO --> DESCUADRADA: [Diferencia de arqueo != C$ 0.00]
+
+    DESCUADRADA --> CONCILIADA: [Campo Justificación/Observaciones completado]
+
+    CONCILIADA --> CERRADA: Confirmar Cierre / Generar Reporte Z y consolidar saldos
+
+    CERRADA --> [*]: Terminal bloqueada para futuras operaciones
