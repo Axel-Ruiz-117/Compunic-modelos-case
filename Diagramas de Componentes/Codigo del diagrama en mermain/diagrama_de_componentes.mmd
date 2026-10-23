@@ -1,0 +1,88 @@
+flowchart TD
+    %% ==========================================
+    %% CAPA DE PRESENTACIÓN
+    %% ==========================================
+    subgraph CapaPresentacion ["Capa de Presentación (Navegador / Cliente)"]
+        UI["UI Web (HTML5 / Vanilla JS / CSS3)"]
+        MermaidJS["Mermaid.js<br/>(Motor Gráfico)"]
+        AURUM["Widget AURUM<br/>(Asistente IA)"]
+
+        UI --> MermaidJS
+    end
+
+    %% ==========================================
+    %% CAPA DE ENTRADA Y SEGURIDAD
+    %% ==========================================
+    subgraph CapaSeguridad ["Capa de Entrada y Seguridad (Node.js / Express)"]
+        Router["Router Central<br/>(Express App)"]
+        RateLimit["Middleware:<br/>Rate Limiting"]
+        AuthRBAC["Middleware:<br/>Auth & RBAC"]
+
+        Router --> RateLimit
+        RateLimit --> AuthRBAC
+    end
+
+    UI -->|Peticiones REST / HTTPS| Router
+    AURUM -->|Consultas Contextuales| Router
+
+    %% ==========================================
+    %% CONTROLADORES DE LÓGICA DE NEGOCIO
+    %% ==========================================
+    subgraph CapaLogica ["Controladores de Lógica de Negocio"]
+        STC["ServiciosTecnicosController"]
+        WCC["WebCheckoutController"]
+        AC["AuthController"]
+        RC["ReportesController"]
+        VPC["VentasPOSController"]
+        CTC["CajaTurnosController"]
+        ICC["InventarioComprasController"]
+        DC["DevolucionesController"]
+    end
+
+    AuthRBAC --> STC
+    AuthRBAC --> WCC
+    AuthRBAC --> AC
+    AuthRBAC --> RC
+    AuthRBAC --> VPC
+    AuthRBAC --> CTC
+    AuthRBAC --> ICC
+    AuthRBAC --> DC
+
+    %% ==========================================
+    %% DEPENDENCIAS Y LIBRERÍAS (NPM)
+    %% ==========================================
+    subgraph Librerias ["Librerías y Dependencias de Código (npm)"]
+        Multer["multer (Carga de Fotos y Comprobantes)"]
+        Nodemailer["nodemailer (Despacho SMTP)"]
+        Argon2["argon2 (Cifrado de Credenciales)"]
+        Pdfkit["pdfkit (Renderizado de Facturas / PDF)"]
+        Xlsx["xlsx (Exportación de Hojas de Cálculo)"]
+    end
+
+    STC --> Multer
+    STC --> Nodemailer
+    WCC --> Multer
+    WCC --> Nodemailer
+    AC --> Argon2
+    RC --> Pdfkit
+    RC --> Xlsx
+    VPC --> Pdfkit
+
+    %% ==========================================
+    %% CAPA DE DATOS
+    %% ==========================================
+    subgraph CapaDatos ["Capa de Datos"]
+        MySQLDriver["Driver mysql2<br/>(Connection Pool)"]
+        DB[("Base de Datos<br/>MySQL")]
+
+        MySQLDriver -->|Consultas SQL Transaccionales| DB
+    end
+
+    STC --> MySQLDriver
+    WCC --> MySQLDriver
+    AC --> MySQLDriver
+    RC --> MySQLDriver
+    VPC --> MySQLDriver
+    CTC --> MySQLDriver
+    ICC --> MySQLDriver
+    DC --> MySQLDriver
