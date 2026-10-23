@@ -1,0 +1,13 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant GUI as GUI: Gestión de Usuarios
+
+    Admin->>+GUI: Ingresar al panel de Gestión de Usuarios
+    GUI-->>Admin: Desplegar listado de usuarios con sus roles y estados
+    Admin->>GUI: Ingresar datos personales, seleccionar rol y presionar "Guardar"
+    GUI-->>Admin: Desplegar nuevo usuario en la lista con estado 'Pendiente'
+    GUI-->>Admin: Notificar: 'Invitación con enlace seguro enviada exitosamente'
+    GUI-->>Admin: Actualizar tabla de usuarios en pantalla y mostrar mensaje de éxito
+    Admin->>GUI: Visualizar panel de usuarios actualizado
+    deactivate GUI

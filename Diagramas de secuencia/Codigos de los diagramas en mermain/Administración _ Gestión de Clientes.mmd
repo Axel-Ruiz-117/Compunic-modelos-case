@@ -1,0 +1,11 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant GUI as GUI: Gestión de Clientes
+
+    Admin->>+GUI: Ingresar a la vista "Gestión de Clientes"
+    GUI-->>Admin: Desplegar listado de clientes activos
+    Admin->>GUI: Hacer clic en "Agregar Cliente"
+    GUI-->>Admin: Mostrar formulario de captura (datos requeridos y tipo de cliente)
+    Admin->>GUI: Ingresar datos (nombre, cédula/RUC, dirección, tipo) y presionar "Guardar"
+    GUI-->>-Admin: Actualizar listado de clientes en pantalla y mostrar mensaje de éxito con ID autogenerado

@@ -1,0 +1,25 @@
+sequenceDiagram
+    autonumber
+    actor Vendedor as Vendedor
+    actor Admin as Administrador
+    participant GUI as GUI: Sistema de Inventario
+
+    rect rgb(255, 255, 2255)
+        note over Vendedor, GUI: Consultas Rápidas de Productos (Vendedor)
+        Vendedor->>+GUI: Acceder al buscador rápido de productos
+        GUI-->>Vendedor: Desplegar barra de búsqueda y catálogo inicial
+        Vendedor->>GUI: Ingresar criterio de búsqueda y presionar "Buscar"
+        GUI-->>Vendedor: Desplegar lista de productos con stock actual y precio
+        Vendedor->>GUI: Visualizar disponibilidad y precio para informar al cliente
+        deactivate GUI
+    end
+
+    rect rgb(255, 255, 255)
+        note over Admin, GUI: Monitoreo de Historial de Movimientos (Administrador)
+        Admin->>+GUI: Acceder a la sección "Historial de Movimientos"
+        GUI-->>Admin: Mostrar vista de auditoría con filtros paramétricos
+        Admin->>GUI: Seleccionar filtros y presionar "Buscar"
+        GUI-->>Admin: Renderizar tabla de auditoría con entradas, salidas y mermas
+        Admin->>GUI: Auditar trazabilidad y flujo de mercancía
+        deactivate GUI
+    end

@@ -1,0 +1,32 @@
+sequenceDiagram
+    autonumber
+    actor Cajero as Cajero
+    participant GUI as GUI: Terminal de caja
+
+    rect rgb(255, 255, 255)
+        note over Cajero, GUI: Apertura de Turno
+        Cajero->>+GUI: Acceder al módulo de Caja y presionar "Abrir Caja"
+        GUI-->>Cajero: Desplegar formulario solicitando fondo inicial de caja
+        Cajero->>GUI: Ingresar monto de efectivo físico y presionar "Confirmar monto"
+        GUI-->>Cajero: Habilitar funciones de cobro y mostrar "Caja abierta exitosamente"
+    end
+
+    rect rgb(255, 255, 255)
+        note over Cajero, GUI: Operación de Cobro
+        Cajero->>GUI: Buscar y seleccionar orden o factura a cobrar
+        GUI-->>Cajero: Calcular y mostrar en pantalla subtotal, IVA, descuentos y total adeudado
+        Cajero->>GUI: Seleccionar método de pago e ingresar monto recibido
+        GUI-->>Cajero: Calcular y mostrar cambio exacto a entregar
+        Cajero->>GUI: Presionar "Registrar Cobro"
+        GUI-->>Cajero: Actualizar estado a "Pagado" y emitir comprobante de pago
+    end
+
+    rect rgb(255, 255, 255)
+        note over Cajero, GUI: Arqueo y Cierre de Caja
+        Cajero->>GUI: Seleccionar opción "Cerrar Caja"
+        GUI-->>Cajero: Desplegar formulario de arqueo solicitando desglose físico
+        Cajero->>GUI: Digitar montos físicos en gaveta y presionar "Calcular Diferencia"
+        GUI-->>Cajero: Contrastar contra saldo teórico y mostrar diferencia de $0.00 (Cuadre perfecto)
+        Cajero->>GUI: Presionar "Confirmar Cierre"
+        GUI-->>-Cajero: Cambiar estado a 'Cerrada', bloquear terminal y generar reporte Z consolidado
+    end

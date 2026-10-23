@@ -1,0 +1,33 @@
+sequenceDiagram
+    autonumber
+    actor Cliente as Cliente
+    participant GUI as GUI: Tienda Web
+
+    rect rgb(255, 255, 255)
+        note over Cliente, GUI: Navegación y Selección de Productos
+        Cliente->>+GUI: Ingresar a la URL principal
+        GUI-->>Cliente: Mostrar catálogo de productos
+        Cliente->>GUI: Aplicar filtros u ordenamiento
+        GUI-->>Cliente: Actualizar catálogo de productos con coincidencias
+        Cliente->>GUI: Clic sobre un producto
+        GUI-->>Cliente: Mostrar ficha técnica detallada
+    end
+
+    rect rgb(255, 255, 255)
+        note over Cliente, GUI: Carrito de Compras
+        Cliente->>GUI: Seleccionar cantidad y presionar "Agregar al carrito"
+        GUI-->>Cliente: Actualizar contador del carrito (stock disponible)
+        Cliente->>GUI: Clic en el icono del carrito
+        GUI-->>Cliente: Mostrar resumen del pedido
+    end
+
+    rect rgb(255, 255, 255)
+        note over Cliente, GUI: Proceso de Checkout y Confirmación
+        Cliente->>GUI: Presionar "Proceder al pago"
+        GUI-->>Cliente: Cargar pantalla de checkout
+        Cliente->>GUI: Ingresar dirección de entrega y teléfono
+        Cliente->>GUI: Seleccionar transferencia o depósito bancario
+        GUI-->>Cliente: Mostrar números de cuenta y módulo de carga de comprobante
+        Cliente->>GUI: Adjuntar comprobante de pago y presionar "Confirmar pedido"
+        GUI-->>-Cliente: Mostrar pantalla de confirmación con código de orden
+    end

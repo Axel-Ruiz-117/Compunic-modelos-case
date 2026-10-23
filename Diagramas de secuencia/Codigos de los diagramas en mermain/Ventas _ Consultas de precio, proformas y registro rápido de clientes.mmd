@@ -1,0 +1,21 @@
+sequenceDiagram
+    autonumber
+    actor Vendedor as Vendedor
+    participant GUI as GUI: Ventas
+
+    Vendedor->>+GUI: Acceder al módulo de Ventas
+    GUI-->>Vendedor: Habilitar herramientas del módulo (Catálogo, Proformas y Clientes)
+
+    rect rgb(255, 255, 255)
+        note over Vendedor, GUI: Consulta de Catálogo y Generación de Proforma
+        Vendedor->>GUI: Buscar producto por código, marca o descripción
+        GUI-->>Vendedor: Mostrar lista de productos con existencias, precios y fotos
+        Vendedor->>GUI: Seleccionar ítems y presionar "Generar proforma"
+        GUI-->>Vendedor: Mostrar proforma formal con desglose de totales e impuestos
+    end
+
+    rect rgb(255, 255, 255)
+        note over Vendedor, GUI: Registro de Nuevo Cliente
+        Vendedor->>GUI: Completar formulario de cliente y presionar "Guardar"
+        GUI-->>-Vendedor: Confirmar registro exitoso y habilitar cliente para facturación
+    end

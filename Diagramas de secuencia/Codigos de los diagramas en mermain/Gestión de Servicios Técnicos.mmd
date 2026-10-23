@@ -1,0 +1,13 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant GUI as GUI: Orden de Servicios
+
+    Admin->>+GUI: Ingresar al módulo de Administración y seleccionar "Órdenes de servicio"
+    GUI-->>Admin: Listar órdenes clasificadas (Pendientes, En Proceso, Terminadas, Canceladas)
+    Admin->>GUI: Seleccionar orden pendiente para abrir detalle
+    GUI-->>Admin: Desplegar información completa (cliente, equipo, diagnóstico) y menú de técnicos
+    Admin->>GUI: Seleccionar Técnico del menú desplegable y presionar "Asignar"
+    GUI-->>Admin: Vincular orden al técnico, cambiar estado visual a 'En Proceso' y mostrar confirmación
+    Admin->>GUI: Verificar orden gestionada en el panel
+    deactivate GUI

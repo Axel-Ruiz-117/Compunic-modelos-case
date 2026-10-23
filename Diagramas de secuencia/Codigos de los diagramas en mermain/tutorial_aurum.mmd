@@ -1,0 +1,11 @@
+sequenceDiagram
+    autonumber
+    actor User as Usuario
+    participant UI as Interfaz: Tutorial AURUM / Dashboard
+
+    User->>+UI: Iniciar sesión en el sistema
+    UI-->>User: Cargar diálogos según el rol y mostrar tutorial interactivo AURUM en pantalla
+    User->>UI: Recorrer pasos guiados y hacer clic en "Finalizar"
+    UI-->>User: Guardar tutorial como completado y desbloquear Dashboard
+    User->>UI: Usar el sistema con normalidad
+    deactivate UI

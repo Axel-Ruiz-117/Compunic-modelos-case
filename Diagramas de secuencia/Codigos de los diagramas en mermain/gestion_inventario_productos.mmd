@@ -1,0 +1,12 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant GUI as GUI: Gestión de Inventario
+
+    Admin->>+GUI: Ingresar al módulo de Inventario
+    GUI-->>Admin: Consultar catálogo y desplegar vista
+    Admin->>GUI: Seleccionar "Agregar Producto"
+    GUI-->>Admin: Desplegar formulario de registro de producto
+    Admin->>GUI: Ingresar datos requeridos y guardar
+    GUI-->>-Admin: Actualizar vista del catálogo y mostrar mensaje de éxito
+    Admin->>Admin: Visualizar catálogo actualizado

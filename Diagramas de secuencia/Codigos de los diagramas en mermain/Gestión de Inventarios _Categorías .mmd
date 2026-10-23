@@ -1,0 +1,12 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant GUI as GUI: Gestión de Categorías
+
+    Admin->>+GUI: Acceder a la sección de Categorías
+    GUI-->>Admin: Consultar y desplegar listado de categorías existentes
+    Admin->>GUI: Seleccionar "Crear Categoría"
+    GUI-->>Admin: Desplegar formulario de registro
+    Admin->>GUI: Ingresar nombre y descripción, y presionar "Guardar"
+    GUI-->>-Admin: Actualizar listado de categorías y mostrar mensaje de éxito
+    Admin->>Admin: Visualizar estructura de categorías actualizada

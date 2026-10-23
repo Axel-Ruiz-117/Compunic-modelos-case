@@ -1,0 +1,13 @@
+sequenceDiagram
+    autonumber
+    actor Admin as ADMINISTRADOR
+    participant GUI as GUI REGISTRO DE COMPRAS
+
+    Admin->>+GUI: Acceder al formulario de compras y seleccionar proveedor
+    GUI-->>Admin: Desplegar formulario con campos de productos, costos e impuestos
+    Admin->>GUI: Agregar productos adquiridos especificando cantidades, costo unitario e impuestos
+    Admin->>GUI: Presionar "Guardar Compra"
+    GUI-->>Admin: Calcular y desglosar subtotal, IVA y monto total general para cotejo contable
+    GUI-->>Admin: Mostrar notificación "Compra registrada con éxito" y actualizar vista con nuevo stock
+    Admin->>GUI: Verificar entrada de mercadería registrada
+    deactivate GUI

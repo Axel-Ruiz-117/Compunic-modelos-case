@@ -1,0 +1,28 @@
+sequenceDiagram
+    autonumber
+    actor Vendedor as Vendedor
+    participant Reg as GUI: Registro de Devolución
+    participant Aut as GUI: Autorización de Devoluciones
+    actor Admin as Administrador
+
+    rect rgb(255, 255, 255)
+        note over Vendedor, Reg: Fase 1: Registro de la Solicitud de Devolución
+        Vendedor->>+Reg: Acceder a "Registrar Solicitud"
+        Reg-->>Vendedor: Desplegar formulario de búsqueda de factura
+        Vendedor->>Reg: Ingresar número de factura original
+        Reg-->>Vendedor: Desplegar detalle de productos facturados
+        Vendedor->>Reg: Seleccionar producto, ingresar motivo y presionar "Enviar Solicitud"
+        Reg-->>-Vendedor: Mostrar confirmación: 'Solicitud registrada en estado Pendiente'
+    end
+
+    rect rgb(255, 255, 255)
+        note over Aut, Admin: Fase 2: Evaluación y Autorización de la Devolución
+        Admin->>+Aut: Acceder a "Autorización de Devoluciones"
+        Aut-->>Admin: Desplegar lista de solicitudes pendientes
+        Admin->>Aut: Seleccionar solicitud pendiente para abrir detalle
+        Aut-->>Admin: Mostrar detalle del artículo y motivo expuesto
+        Admin->>Aut: Presionar "Autorizar"
+        Aut-->>Admin: Solicitar selección de disposición final del producto
+        Admin->>Aut: Seleccionar "Buen estado - Reingresar a ventas" y confirmar
+        Aut-->>-Admin: Actualizar estado a 'Completada', generar nota de crédito y mostrar confirmación de éxito
+    end

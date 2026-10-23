@@ -1,0 +1,11 @@
+sequenceDiagram
+    autonumber
+    actor Vendedor as Vendedor
+    participant GUI as GUI: Nueva Venta
+
+    Vendedor->>+GUI: Acceder a "Nueva Venta"
+    GUI-->>Vendedor: Cargar catálogo de productos y habilitar formulario de venta
+    Vendedor->>GUI: Seleccionar cliente y agregar productos con cantidad
+    GUI-->>Vendedor: Mostrar desglose de subtotales, IVA y total a pagar
+    Vendedor->>GUI: Elegir método de pago y presionar "Procesar venta"
+    GUI-->>-Vendedor: Generar factura fiscal membretada, enviar a impresión y confirmar venta

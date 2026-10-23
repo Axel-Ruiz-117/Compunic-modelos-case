@@ -1,0 +1,9 @@
+sequenceDiagram
+    autonumber
+    actor User as usuario
+    participant Sys as sistema
+
+    User->>+Sys: Accede a pantalla principal de login
+    Sys-->>User: Desplegar formulario de autenticación
+    User->>Sys: Ingresa credenciales y presiona ingresar
+    Sys-->>-User: Redirige al panel de trabajo correspondiente

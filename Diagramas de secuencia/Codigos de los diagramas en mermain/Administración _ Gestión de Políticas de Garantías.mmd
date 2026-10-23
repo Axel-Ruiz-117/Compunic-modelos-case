@@ -1,0 +1,11 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant GUI as GUI: Panel Garantías
+
+    Admin->>+GUI: Ingresar al panel de Administración y seleccionar "Garantías"
+    GUI-->>Admin: Desplegar listado de políticas vigentes
+    Admin->>GUI: Hacer clic en "Registrar Nueva Política", ingresar nombre, duración y condiciones, y presionar "Guardar"
+    GUI-->>Admin: Actualizar lista de políticas en pantalla y mostrar mensaje de éxito
+    Admin->>GUI: Visualizar catálogo de políticas actualizado
+    deactivate GUI

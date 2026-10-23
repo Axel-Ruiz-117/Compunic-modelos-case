@@ -1,0 +1,16 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Login as GUI: Pantalla de Login
+    participant Dash as GUI: Pantalla de Dashboard
+
+    Admin->>+Login: Ingresar credenciales y clic en "Iniciar sesión"
+    Login-->>Admin: Validar formato y autenticidad de sesión
+    Login->>+Dash: Redirigir a vista Dashboard
+    deactivate Login
+
+    Dash->>Dash: Consultar y consolidar métricas del sistema
+    Dash->>Dash: Calcular y renderizar gráficas estadísticas con datos históricos
+    Dash->>Dash: Construir widget de alertas resaltando productos con stock crítico
+    Dash-->>-Admin: Desplegar vista del Dashboard con métricas y alertas completas
+    Admin->>Admin: Visualizar gráficas y estado general del negocio

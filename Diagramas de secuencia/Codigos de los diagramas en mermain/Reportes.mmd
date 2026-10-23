@@ -1,0 +1,13 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Administrador
+    participant Rep as Modulo Reportes
+
+    Admin->>+Rep: Accede a la vista principal
+    Rep-->>Admin: Muestra panel con categorías de reportes
+    Admin->>Rep: Selecciona categoría y configura filtros
+    Admin->>Rep: Presiona botón Generar
+    Rep-->>Admin: Renderiza vista previa en pantalla con resultados encontrados
+    Admin->>Rep: Click en Exportar y selecciona formato (PDF o Excel)
+    Rep-->>-Admin: Dispara descarga automática del archivo generado correctamente
+    Admin->>Admin: Verifica archivo descargado localmente
